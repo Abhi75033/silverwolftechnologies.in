@@ -538,9 +538,8 @@ const ImageLightbox = ({
                 e.stopPropagation();
                 setActiveIdx(idx);
               }}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                idx === activeIdx ? "bg-primary w-5" : "bg-white/30 w-2 hover:bg-white/50"
-              }`}
+              className={`h-2 rounded-full transition-all duration-300 ${idx === activeIdx ? "bg-primary w-5" : "bg-white/30 w-2 hover:bg-white/50"
+                }`}
               aria-label={`Go to image ${idx + 1}`}
             />
           ))}
@@ -710,11 +709,10 @@ const ProjectModal = ({
         style={{ animation: "modalFadeIn 0.3s ease-out forwards" }}
       />
       <div
-        className={`glass relative overflow-hidden transition-all duration-500 flex flex-col z-10 ${
-          isFullScreen
+        className={`glass relative overflow-hidden transition-all duration-500 flex flex-col z-10 ${isFullScreen
             ? "w-screen h-screen max-w-none max-h-none rounded-none border-0 m-0 p-0 bg-[#030308]"
             : "w-full h-full sm:h-auto sm:max-w-5xl rounded-none sm:rounded-2xl border-0 sm:border border-white/10 hover:border-primary/20 max-h-full sm:max-h-[92vh] md:max-h-[85vh] bg-[#070710]/95 shadow-elegant"
-        }`}
+          }`}
         style={{ animation: "modalSlideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards" }}
       >
         {/* Glow blobs */}
@@ -739,19 +737,19 @@ const ProjectModal = ({
             <div className="flex items-center gap-4">
               {/* Tabs for desktop */}
               <div className="flex bg-white/[0.02] border border-white/5 rounded-xl p-0.5">
-                <button 
+                <button
                   onClick={() => setActiveTab("overview")}
                   className={`text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-lg transition-all ${activeTab === "overview" ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" : "text-muted-foreground hover:text-white"}`}
                 >
                   Overview
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab("architecture")}
                   className={`text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-lg transition-all ${activeTab === "architecture" ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" : "text-muted-foreground hover:text-white"}`}
                 >
                   Technical Setup
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab("metrics")}
                   className={`text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-lg transition-all ${activeTab === "metrics" ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" : "text-muted-foreground hover:text-white"}`}
                 >
@@ -787,16 +785,16 @@ const ProjectModal = ({
           {/* --- Main Content Area --- */}
           <div className="flex-1 overflow-hidden flex flex-col z-10">
             <div className="flex-1 grid grid-cols-12 overflow-hidden h-full">
-              
+
               {/* --- LEFT SIDE: Visual Theater (Dynamic based on selected tab) --- */}
               <div className="col-span-7 h-full flex flex-col justify-center border-r border-white/5 bg-[#010103] overflow-y-auto p-6 relative">
-                
+
                 {/* Tab: Overview View */}
                 {activeTab === "overview" && (
                   <div className="flex flex-col gap-6 animate-fade-up max-w-2xl mx-auto w-full">
-                    
+
                     {/* Image container with expand toggle */}
-                    <div 
+                    <div
                       onClick={() => setIsLightboxOpen(true)}
                       className="aspect-[16/10] w-full rounded-xl overflow-hidden relative bg-[#0b0b14] border border-white/5 shadow-2xl group/media cursor-zoom-in"
                       title="Click to view image in full screen"
@@ -813,7 +811,7 @@ const ProjectModal = ({
                         alt={project.title}
                         className="w-full h-full object-contain relative z-10 transition-transform duration-700 group-hover/media:scale-102"
                       />
-                      
+
                       {/* Glass Magnifier overlay */}
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/media:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20 pointer-events-none">
                         <div className="px-4 py-2 rounded-full glass border border-white/10 text-xs text-white font-bold flex items-center gap-2 shadow-lg shadow-black/40 transform scale-95 group-hover/media:scale-100 transition-transform duration-300">
@@ -859,9 +857,8 @@ const ProjectModal = ({
                                 e.stopPropagation();
                                 setActiveMediaIndex(idx);
                               }}
-                              className={`h-1.5 rounded-full transition-all duration-300 ${
-                                idx === activeMediaIndex ? "bg-primary w-4" : "bg-white/50 w-1.5 hover:bg-white/80"
-                              }`}
+                              className={`h-1.5 rounded-full transition-all duration-300 ${idx === activeMediaIndex ? "bg-primary w-4" : "bg-white/50 w-1.5 hover:bg-white/80"
+                                }`}
                               aria-label={`Go to slide ${idx + 1}`}
                             />
                           ))}
@@ -892,7 +889,7 @@ const ProjectModal = ({
                       </div>
 
                       <div className="w-full flex flex-col gap-5 p-4 md:p-6 rounded-2xl bg-[#06060c] border border-white/5 shadow-inner select-none">
-                        
+
                         {/* Telemetry Status Banner */}
                         <div className="h-11 w-full flex items-center justify-center px-4 py-2.5 bg-[#020205]/40 border border-white/5 rounded-xl text-center">
                           {hoveredNode !== null ? (
@@ -908,7 +905,7 @@ const ProjectModal = ({
                         {/* Interactive SVG Flowchart Canvas */}
                         <div className="w-full relative aspect-[600/360] bg-[#020205]/60 border border-white/5 rounded-xl overflow-hidden p-2">
                           <svg className="w-full h-full" viewBox="0 0 600 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            
+
                             <defs>
                               <linearGradient id="gflow" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stopColor="hsl(var(--primary))" />
@@ -963,15 +960,14 @@ const ProjectModal = ({
                                 <div
                                   onMouseEnter={() => setHoveredNode(idx)}
                                   onMouseLeave={() => setHoveredNode(null)}
-                                  className={`w-full h-full rounded-xl border p-2 flex flex-col items-center justify-center text-center backdrop-blur-md transition-all duration-300 cursor-pointer select-none relative ${
-                                    hoveredNode === idx
+                                  className={`w-full h-full rounded-xl border p-2 flex flex-col items-center justify-center text-center backdrop-blur-md transition-all duration-300 cursor-pointer select-none relative ${hoveredNode === idx
                                       ? "border-primary bg-primary/10 shadow-[0_0_15px_rgba(139,92,246,0.3)] scale-105"
                                       : "border-white/5 bg-[#070710]/90 hover:border-white/20 hover:bg-slate-900/60"
-                                  }`}
+                                    }`}
                                 >
                                   <span className="text-[11px] font-black text-white leading-tight">{node.label}</span>
                                   <span className="text-[9.5px] text-zinc-300 font-semibold mt-0.5 leading-tight">{node.desc}</span>
-                                  
+
                                   <span className="absolute top-1.5 right-1.5 flex h-1.5 w-1.5">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
@@ -1013,12 +1009,12 @@ const ProjectModal = ({
                 {/* Tab: Performance Metrics Score Dials */}
                 {activeTab === "metrics" && (
                   <div className="flex flex-col gap-5 animate-fade-up max-w-2xl mx-auto w-full p-4">
-                    
+
                     {auditState === "scanning" ? (
                       /* Mock Lighthouse scan terminal */
                       <div className="w-full bg-[#030307] border border-white/5 p-6 rounded-2xl font-mono text-xs text-emerald-400 shadow-2xl relative min-h-[300px] flex flex-col justify-between overflow-hidden">
                         <div className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-80 pointer-events-none laser-line" />
-                        
+
                         <div className="flex flex-col gap-3">
                           <div className="flex items-center justify-between border-b border-white/5 pb-2 text-[10px] text-muted-foreground uppercase tracking-wider">
                             <span>Google PageSpeed Lighthouse Engine</span>
@@ -1027,13 +1023,13 @@ const ProjectModal = ({
                               Auditing...
                             </span>
                           </div>
-                          
+
                           <div className="flex flex-col gap-2 mt-4 text-[10.5px] text-left">
                             <div>$ lighthouse --url={project.title.toLowerCase().replace(/\s+/g, '-')}.local --chrome-flags="--headless"</div>
                             <div className="text-emerald-500/60 mt-1">&gt; Connecting to Chrome DevTools Protocol...</div>
                             <div className="text-emerald-500/60">&gt; Navigating to target site...</div>
                             <div className="text-emerald-500/60">&gt; First Contentful Paint: 0.3s</div>
-                            
+
                             {scanProgress >= 35 && (
                               <div className="text-emerald-500/60 animate-fade-in">&gt; Analyzing Document Object Model (DOM) depth...</div>
                             )}
@@ -1055,7 +1051,7 @@ const ProjectModal = ({
                             <span>{scanProgress}%</span>
                           </div>
                           <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/5">
-                            <div 
+                            <div
                               className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-300"
                               style={{ width: `${scanProgress}%` }}
                             />
@@ -1065,7 +1061,7 @@ const ProjectModal = ({
                     ) : (
                       /* Scorecard dials and dropdown diagnostics */
                       <div className="flex flex-col gap-5 animate-fade-in w-full">
-                        
+
                         <div className="text-center">
                           <h4 className="text-sm font-bold text-gradient-primary uppercase tracking-wider flex items-center justify-center gap-2 mb-1">
                             <Activity className="h-4 w-4" /> Speed, Design & Quality Check
@@ -1079,11 +1075,10 @@ const ProjectModal = ({
                             <button
                               key={idx}
                               onClick={() => setSelectedMetric(selectedMetric === idx ? null : idx)}
-                              className={`p-4 rounded-xl border transition-all duration-300 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:-translate-y-0.5 active:translate-y-0 cursor-pointer ${
-                                selectedMetric === idx 
+                              className={`p-4 rounded-xl border transition-all duration-300 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:-translate-y-0.5 active:translate-y-0 cursor-pointer ${selectedMetric === idx
                                   ? "border-primary bg-primary/[0.03] shadow-[0_0_15px_rgba(139,92,246,0.15)]"
                                   : "bg-white/[0.01] hover:bg-white/[0.03] border-white/5 hover:border-white/10"
-                              }`}
+                                }`}
                             >
                               <div className="relative w-16 h-16 mb-2.5 flex items-center justify-center">
                                 <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
@@ -1122,7 +1117,7 @@ const ProjectModal = ({
                               </h5>
                               <span className="text-[8px] text-muted-foreground uppercase font-semibold">Target Score: {metrics.scores[selectedMetric].score}/100</span>
                             </div>
-                            
+
                             <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
                               {getDiagnosticsData(project.title, metrics.scores[selectedMetric].name).map((diag, i) => (
                                 <div key={i} className="flex justify-between items-center py-1 border-b border-white/[0.02] last:border-0 gap-4 text-left">
@@ -1157,9 +1152,9 @@ const ProjectModal = ({
 
               {/* --- RIGHT SIDE: Project Text Info / Actions --- */}
               <div className="col-span-5 h-full overflow-y-auto p-6 md:p-8 flex flex-col justify-between bg-[#04040b] relative">
-                
+
                 <div className="flex flex-col gap-6">
-                  
+
                   {/* Title block */}
                   <div>
                     <h3 className="text-2xl md:text-3xl font-extrabold text-gradient leading-tight tracking-tight">{project.title}</h3>
@@ -1212,8 +1207,8 @@ const ProjectModal = ({
 
                       <div className="flex flex-wrap gap-1.5 mt-2">
                         {project.technologies.map((tech) => (
-                          <span 
-                            key={tech} 
+                          <span
+                            key={tech}
                             className="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-white/[0.02] border border-white/5 text-silver hover:border-primary/30 hover:text-white transition-all duration-300"
                           >
                             {tech}
@@ -1242,7 +1237,7 @@ const ProjectModal = ({
 
                 {/* Bottom Outcome & Actions */}
                 <div className="flex flex-col gap-4 mt-8 text-left">
-                  
+
                   {/* Results Highlight Box (Now highlights "Why it Matters" in plain English) */}
                   <div className="p-4 rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-l-2 border-primary backdrop-blur-sm">
                     <h4 className="text-[9px] font-bold uppercase tracking-wider text-primary mb-1">Why This Matters (Business Value)</h4>
@@ -1254,7 +1249,7 @@ const ProjectModal = ({
                   {/* Action CTA Grid */}
                   <div className="flex flex-row gap-3 shrink-0">
                     {project.liveUrl && (
-                      <a 
+                      <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -1263,13 +1258,13 @@ const ProjectModal = ({
                         <ExternalLink className="h-3.5 w-3.5" /> Visit Live
                       </a>
                     )}
-                    <button 
+                    <button
                       onClick={handleInquire}
                       className="flex-1 flex items-center justify-center gap-2 text-xs font-bold px-4 py-3.5 rounded-xl bg-gradient-primary hover:glow-ring text-white transition-all transform hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-primary/20"
                     >
                       <Send className="h-3 w-3" /> Inquiry Build
                     </button>
-                    <button 
+                    <button
                       onClick={onClose}
                       className="flex-1 flex items-center justify-center gap-1.5 text-xs font-bold px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:bg-white/[0.08] hover:border-white/20 transition-all text-silver transform hover:-translate-y-0.5 active:translate-y-0"
                     >
@@ -1305,19 +1300,19 @@ const ProjectModal = ({
 
           {/* Tab Controller: Pill Switcher Dock */}
           <div className="px-4 py-2 bg-[#05050c]/80 border-b border-white/5 flex gap-1.5 justify-center shrink-0">
-            <button 
+            <button
               onClick={() => setActiveTab("overview")}
               className={`flex-1 text-[10px] font-black uppercase py-2 text-center rounded-lg transition-all ${activeTab === "overview" ? "bg-primary text-white shadow-lg shadow-primary/25" : "text-muted-foreground hover:text-white bg-white/[0.01]"}`}
             >
               Overview
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab("architecture")}
               className={`flex-1 text-[10px] font-black uppercase py-2 text-center rounded-lg transition-all ${activeTab === "architecture" ? "bg-primary text-white shadow-lg shadow-primary/25" : "text-muted-foreground hover:text-white bg-white/[0.01]"}`}
             >
               Architecture
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab("metrics")}
               className={`flex-1 text-[10px] font-black uppercase py-2 text-center rounded-lg transition-all ${activeTab === "metrics" ? "bg-primary text-white shadow-lg shadow-primary/25" : "text-muted-foreground hover:text-white bg-white/[0.01]"}`}
             >
@@ -1326,9 +1321,9 @@ const ProjectModal = ({
           </div>
 
           {/* Main Visualizer viewport (Top 45% of content space) */}
-          <div className="h-[210px] shrink-0 border-b border-white/5 bg-[#010102] relative flex items-center justify-center overflow-hidden p-3">
+          <div className={`shrink-0 border-b border-white/5 bg-[#010102] relative flex items-center justify-center overflow-hidden p-3 transition-all duration-300 ${activeTab === "architecture" ? "h-[340px]" : "h-[210px]"}`}>
             {activeTab === "overview" && (
-              <div 
+              <div
                 onClick={() => setIsLightboxOpen(true)}
                 className="w-full h-full rounded-xl overflow-hidden relative border border-white/10 shadow-2xl cursor-zoom-in"
               >
@@ -1342,7 +1337,7 @@ const ProjectModal = ({
                   alt={project.title}
                   className="w-full h-full object-contain relative z-10"
                 />
-                
+
                 {/* Media arrows */}
                 {project.media.length > 1 && (
                   <button
@@ -1372,20 +1367,21 @@ const ProjectModal = ({
             {activeTab === "architecture" && (() => {
               const archData = getArchitectureData(project.title);
               return (
-                <div className="w-full h-full flex flex-col gap-2 overflow-hidden relative">
-                  {/* Minimized status notification banner */}
-                  <div className="h-6 w-full flex items-center justify-center px-2 py-0.5 bg-[#020205]/60 border border-white/5 rounded-md text-center">
+                <div className="w-full h-full flex flex-col gap-1.5 overflow-hidden relative">
+                  {/* Status banner */}
+                  <div className="shrink-0 h-6 w-full flex items-center justify-between px-3 bg-[#020205]/60 border border-white/5 rounded-lg">
                     {hoveredNode !== null ? (
-                      <p className="text-[8px] font-bold text-primary animate-fade-in truncate">
+                      <p className="text-[9px] font-bold text-primary truncate">
                         {archData.nodes[hoveredNode].label}: <span className="text-white font-medium">{archData.nodes[hoveredNode].info}</span>
                       </p>
                     ) : (
-                      <p className="text-[8px] text-muted-foreground truncate">Tap on any system node to inspect telemetry.</p>
+                      <p className="text-[9px] text-zinc-500">Tap a node to inspect</p>
                     )}
+                    <span className="text-[8px] text-primary/70 font-bold shrink-0 ml-2">Live Map</span>
                   </div>
-                  {/* Interactive SVG blueprint */}
-                  <div className="w-full h-[115px] bg-[#020205]/40 border border-white/5 rounded-lg overflow-x-auto overflow-y-hidden scrollbar-none relative flex items-center">
-                    <svg className="min-w-[340px] w-full h-full" viewBox="0 0 600 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Interactive SVG blueprint — fills remaining height */}
+                  <div className="flex-1 min-h-0 bg-[#020205]/40 border border-white/5 rounded-xl overflow-hidden flex items-center justify-center">
+                    <svg className="w-full h-full" viewBox="50 0 500 350" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <defs>
                         <linearGradient id="gflow-mob" x1="0%" y1="0%" x2="100%" y2="100%">
                           <stop offset="0%" stopColor="hsl(var(--primary))" />
@@ -1395,29 +1391,33 @@ const ProjectModal = ({
                       {/* Connections */}
                       {archData.connections.map((conn, idx) => (
                         <g key={`conn-mob-${idx}`}>
-                          <path d={conn.path} stroke="rgba(255, 255, 255, 0.05)" strokeWidth="3.5" fill="none" />
-                          <path d={conn.path} stroke="url(#gflow-mob)" strokeWidth="2" strokeDasharray="6, 5" className="flow-line" fill="none" />
+                          <path d={conn.path} stroke="rgba(255,255,255,0.08)" strokeWidth="4" fill="none" />
+                          <path d={conn.path} stroke="url(#gflow-mob)" strokeWidth="2.5" strokeDasharray="8,6" className="flow-line" fill="none" />
                         </g>
                       ))}
                       {/* Nodes */}
                       {archData.nodes.map((node, idx) => (
-                        <foreignObject key={`node-mob-${idx}`} x={node.x - 70} y={node.y - 25} width="140" height="50" className="overflow-visible">
+                        <foreignObject key={`node-mob-${idx}`} x={node.x - 88} y={node.y - 30} width="176" height="60" className="overflow-visible">
                           <div
                             onClick={() => setHoveredNode(hoveredNode === idx ? null : idx)}
-                            className={`w-full h-full rounded-lg border flex flex-col items-center justify-center text-center backdrop-blur-md transition-all ${hoveredNode === idx ? "border-primary bg-primary/20 scale-105 shadow-[0_0_8px_rgba(139,92,246,0.3)]" : "border-white/5 bg-[#070710]/95"}`}
+                            className={`w-full h-full rounded-xl border-2 flex flex-col items-center justify-center text-center backdrop-blur-md transition-all duration-200 ${
+                              hoveredNode === idx
+                                ? "border-primary bg-primary/25 shadow-[0_0_16px_rgba(139,92,246,0.5)]"
+                                : "border-white/10 bg-[#070714]/95 hover:border-white/20"
+                            }`}
                           >
-                            <span className="text-[9px] font-black text-white leading-tight">{node.label}</span>
-                            <span className="text-[7.5px] text-zinc-300 font-semibold mt-0.5 leading-tight">{node.desc}</span>
+                            <span className="text-[17px] font-black text-white leading-tight px-1">{node.label}</span>
+                            <span className="text-[13px] text-zinc-300 font-semibold mt-0.5 leading-tight">{node.desc}</span>
                           </div>
                         </foreignObject>
                       ))}
                     </svg>
                   </div>
-                  {/* Console logs (Mini version) */}
-                  <div className="h-[45px] bg-[#020205] border border-white/5 p-1 rounded-md font-mono text-[7px] text-emerald-300 overflow-hidden flex flex-col justify-end">
+                  {/* Console logs */}
+                  <div className="shrink-0 h-[36px] bg-[#020205] border border-white/5 px-2 py-1 rounded-lg font-mono text-[8px] text-emerald-300 overflow-hidden flex flex-col justify-end">
                     {logs.slice(-2).map((log, idx) => (
                       <div key={idx} className="truncate text-left leading-relaxed">
-                        <span className="text-emerald-500/60 mr-1">&gt;</span>{log}
+                        <span className="text-emerald-500/50 mr-1">&gt;</span>{log}
                       </div>
                     ))}
                   </div>
@@ -1490,7 +1490,7 @@ const ProjectModal = ({
 
           {/* Details Scroll Area (Bottom 55%) */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-28">
-            
+
             {activeTab === "overview" && (
               <div className="space-y-3 animate-fade-up">
                 {/* Stats Grid */}
@@ -1566,7 +1566,7 @@ const ProjectModal = ({
           <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/5 bg-[#05050b]/90 backdrop-blur-md flex flex-col gap-2 z-20 shrink-0">
             <div className="flex gap-2">
               {project.liveUrl && (
-                <a 
+                <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -1575,14 +1575,14 @@ const ProjectModal = ({
                   <ExternalLink className="h-3 w-3" /> Visit Live
                 </a>
               )}
-              <button 
+              <button
                 onClick={handleInquire}
                 className="flex-1 flex items-center justify-center gap-1 text-[11px] font-black uppercase py-3 rounded-xl bg-gradient-primary text-white shadow-lg shadow-primary/25"
               >
                 <Send className="h-3 w-3" /> Inquiry Build
               </button>
             </div>
-            <button 
+            <button
               onClick={onClose}
               className="w-full flex items-center justify-center py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-[10px] font-bold text-silver"
             >
@@ -1691,11 +1691,10 @@ const PortfolioCard = ({
               <button
                 key={idx}
                 onClick={(e) => { e.stopPropagation(); setActiveMedia(idx); }}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  idx === activeMedia
+                className={`h-1.5 rounded-full transition-all duration-300 ${idx === activeMedia
                     ? "bg-primary w-4"
                     : "bg-white/50 hover:bg-white/80 w-1.5"
-                }`}
+                  }`}
                 aria-label={`Show ${m.type} ${idx + 1}`}
               />
             ))}
@@ -1834,11 +1833,10 @@ export const Portfolio = () => {
             <button
               key={idx}
               onClick={() => { setActiveIndex(idx); pauseTemporarily(); }}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                idx === activeIndex
+              className={`h-1.5 rounded-full transition-all duration-500 ${idx === activeIndex
                   ? "w-8 bg-primary"
                   : "w-3 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-              }`}
+                }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
