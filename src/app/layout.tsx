@@ -10,7 +10,6 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { AdSenseFooterBanner } from "@/components/AdSenseFooterBanner";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
-import { PageLoader } from "@/components/site/PageLoader";
 import { RouteProgress } from "@/components/site/RouteProgress";
 import "./globals.css";
 
@@ -38,8 +37,7 @@ export default function RootLayout({
         <SchemaMarkup type="localBusiness" />
         <SchemaMarkup type="website" />
 
-        {/* Full-screen loading screen on initial visit */}
-        <PageLoader />
+
         
         <TooltipProvider>
           {/* Slim top progress bar on route changes */}
