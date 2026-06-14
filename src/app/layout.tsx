@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
+import { AdSenseFooterBanner } from "@/components/AdSenseFooterBanner";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { PageLoader } from "@/components/site/PageLoader";
 import { RouteProgress } from "@/components/site/RouteProgress";
@@ -46,12 +47,20 @@ export default function RootLayout({
           <div className="flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1 page-transition-enter">{children}</main>
+            <AdSenseFooterBanner />
             <Footer />
             <WhatsAppButton />
           </div>
           <Toaster />
           <Sonner />
         </TooltipProvider>
+        {/* Google AdSense */}
+        <Script
+          id="google-adsense"
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2747147036042508"
+          crossOrigin="anonymous"
+        />
         {/* Google Analytics (GA4) */}
         <Script
           id="google-analytics-loader"
