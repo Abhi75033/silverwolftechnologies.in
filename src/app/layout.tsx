@@ -11,7 +11,7 @@ import { Footer } from "@/components/site/Footer";
 import { AdSenseFooterBanner } from "@/components/AdSenseFooterBanner";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { RouteProgress } from "@/components/site/RouteProgress";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
