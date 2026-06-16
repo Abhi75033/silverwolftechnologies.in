@@ -3,7 +3,7 @@ import { Testimonials } from "@/components/site/Testimonials";
 import { Contact } from "@/components/site/Contact";
 import { SITE } from "@/data/site";
 import type { Metadata } from "next";
-import Breadcrumb from "@/components/Breadcrumb";
+import { PortfolioHero } from "@/components/site/PortfolioHero";
 
 export const metadata: Metadata = {
   title: `Portfolio & Case Studies`,
@@ -37,17 +37,17 @@ const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "Silver Wolf Technologies — Recent Projects",
-  "description": "Selected work by Silver Wolf Technologies including LMS, CRM, attendance systems and enterprise HR platforms.",
+  "description": "Selected work by Silver Wolf Technologies including plagiarism checkers, travel portals, e-commerce boutiques, CRM platforms, HR systems, mobile apps, bug fixing audits, and digital marketing campaigns.",
   "itemListElement": [
     {
       "@type": "ListItem",
       "position": 1,
       "item": {
         "@type": "CreativeWork",
-        "name": "Smart LMS — Learning Management System",
-        "description": "21-table architecture, offline-to-online enrollment, auto-certificates. Built by Silver Wolf Technologies.",
+        "name": "Plagzap",
+        "description": "Real-time plagiarism scans, AI detection, side-by-side comparison, API key manager.",
         "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
-        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-lms.8180f0db.png"
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/Plagzap/Screenshot%202026-06-14%20at%204.09.42%20PM.png"
       }
     },
     {
@@ -55,15 +55,26 @@ const itemListSchema = {
       "position": 2,
       "item": {
         "@type": "CreativeWork",
-        "name": "Attendance Management System",
-        "description": "Geo-fencing, biometric integration, managing 5000+ employees.",
+        "name": "Dream Destination",
+        "description": "Responsive holiday planning portal, destination galleries, custom booking engine.",
         "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
-        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-attendance.5bea53d8.png"
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/Dreamdestination/Screenshot%202026-06-14%20at%2010.12.06%20PM.png"
       }
     },
     {
       "@type": "ListItem",
       "position": 3,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "Sakhi Fragrance House",
+        "description": "Shopify D2C store, 4.2% conversion rate, integrated custom theme.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/Dreamdestination/Screenshot%202026-06-14%20at%2010.12.06%20PM.png"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
       "item": {
         "@type": "CreativeWork",
         "name": "SalesForge CRM",
@@ -74,13 +85,123 @@ const itemListSchema = {
     },
     {
       "@type": "ListItem",
-      "position": 4,
+      "position": 5,
       "item": {
         "@type": "CreativeWork",
         "name": "HR Portal & Employee Management",
-        "description": "Leave workflows, payroll integration, birthday notifications for enterprise HR.",
+        "description": "Leave workflows, payroll integration, birthday notifications.",
         "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
         "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-hr.512b3421.png"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "FitFlow Mobile App",
+        "description": "React Native application, iOS/Android launch, push notifications.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-lms.8180f0db.png"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "CodeRescue System Audit",
+        "description": "Stabilized legacy server, resolved 50+ memory leaks, boosted loading speed by 250%.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-crm.168b67dc.png"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "RankBoost SEO Campaign",
+        "description": "Organic traffic growth from 5k to 50k monthly sessions.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-1.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "LeadVelocity PPC Campaign",
+        "description": "Meta/Google Ads campaign, 25k leads, 3.4x ROAS.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-2.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "SocialWave Campaign",
+        "description": "1.2M impressions, 25k leads generated, 3.4x ROI.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-2.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "Apex Visuals Branding",
+        "description": "Full identity system, corporate logo, marketing collateral.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-3.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "Cinematic Cut Edits",
+        "description": "YouTube channel scaling to 500k subscribers, 15M+ views.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-1.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "PixelPerfect Product Retouching",
+        "description": "Batch-processed 5,000+ catalog images, white-background extraction, color matching.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-3.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "Vanguard Marketing Kit",
+        "description": "Social packs, corporate brochures, event rollups, visual templates.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-1.jpg"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "MedConnect Telehealth Portal",
+        "description": "Patient app wireframes, doctor dashboard UI, interactive Figma prototype.",
+        "creator": {"@type": "Organization", "name": "Silver Wolf Technologies"},
+        "image": "https://www.silverwolftechnologies.in/_next/static/media/portfolio-lms.8180f0db.png"
       }
     }
   ]
@@ -93,17 +214,10 @@ export default function PortfolioPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
-      <section className="pt-36 pb-8">
-        <div className="container max-w-3xl text-center animate-fade-up">
-          <Breadcrumb items={breadcrumbs} />
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Selected Work</span>
-          <h1 className="text-5xl md:text-7xl font-bold mt-4 mb-6">
-            Real launches. <span className="text-gradient">Real results.</span>
-          </h1>
-          <p className="text-muted-foreground text-lg">A snapshot of recent websites, apps and growth campaigns shipped by our team.</p>
-        </div>
-      </section>
-      <Portfolio />
+      
+      <PortfolioHero />
+
+      <Portfolio layout="grid" />
       <Testimonials />
       <Contact compact />
     </>
