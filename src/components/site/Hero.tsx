@@ -285,7 +285,7 @@ export const Hero = () => {
               icon={Cpu}
               title="AI Solutions & Automation"
               short="Custom LLM integrations, automated agentic pipelines, and predictive machine learning models."
-              slug="saas-web-apps"
+              slug="saas-development"
               span="lg:col-span-4"
               gradient="from-emerald-500 via-teal-500 to-indigo-500"
             />

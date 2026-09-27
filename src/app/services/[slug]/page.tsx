@@ -24,45 +24,52 @@ function getServiceJsonLd(service: any) {
     "url": "https://www.silverwolftechnologies.in/services/" + service.slug,
     "provider": {
       "@type": "Organization",
+      "@id": "https://www.silverwolftechnologies.in/#organization",
       "name": "Silver Wolf Technologies",
       "url": "https://www.silverwolftechnologies.in"
     },
-    "areaServed": {
+    // One Country object per market — `name` must be a single string.
+    "areaServed": ["India", "United Kingdom", "United Arab Emirates",
+      "United States", "Canada", "Australia", "Singapore"].map((name) => ({
       "@type": "Country",
-      "name": ["India", "United Kingdom", "United Arab Emirates",
-        "United States", "Canada", "Australia", "Singapore"]
-    },
+      name,
+    })),
     "serviceType": service.category,
     "offers": {
       "@type": "Offer",
       "priceCurrency": "INR",
       "availability": "https://schema.org/InStock",
       "url": "https://www.silverwolftechnologies.in/contact"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "50",
-      "bestRating": "5",
-      "worstRating": "1"
     }
+    // aggregateRating removed: a fixed 4.9★ / 50-review rating with no
+    // matching reviews on the page is treated by Google as misleading
+    // structured data (manual-action risk). Re-add only when it is generated
+    // from real, visible reviews.
   };
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const service = SERVICES.find((s) => s.slug === params.slug);
-  if (!service) return {};
+  // Must 404 here, not only in the page component — see lib/serviceMetadata.ts.
+  if (!service) notFound();
+
+  // Kept under ~155 characters so Google shows it without truncation.
+  let description = "Expert " + service.title + " in India from Silver Wolf " +
+    "Technologies — 10+ years, transparent pricing, reply within 24 hours. " +
+    "Get a free quote.";
+  if (description.length > 155) {
+    description = "Expert " + service.title + " in India — 10+ years, " +
+      "transparent pricing, reply within 24 hours. Get a free quote.";
+  }
 
   return {
     title: service.title + " in India",
-    description: "Silver Wolf Technologies offers expert " +
-      service.title + " in India with 10+ years experience. " +
-      "Production-grade delivery, transparent pricing, " +
-      "24-hour response. Get a free quote today.",
+    description,
     alternates: {
       canonical: "https://www.silverwolftechnologies.in/services/" + params.slug
     },
     openGraph: {
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Silver Wolf Technologies" }],
       title: service.title + " Company in India | Silver Wolf Technologies",
       description: "Senior team. Clean code. Measurable results. " +
         "10+ years delivering " + service.title + " for global clients.",
@@ -84,8 +91,15 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <ServiceDetailClient slug={params.slug} />
-      <article className="sr-only" aria-label="Service Summary for Search Indexing">
-        <h2>What is {service.title} by Silver Wolf Technologies?</h2>
+      {/*
+        Previously `sr-only` (visually hidden). Text shown only to crawlers
+        risks Google's hidden-text policy, so it is now a normal visible
+        section — same words, now also useful to visitors.
+      */}
+      <section className="py-16 md:py-20">
+        <div className="container">
+          <article className="max-w-3xl mx-auto glass rounded-2xl p-8 md:p-10 space-y-4 text-muted-foreground leading-relaxed" aria-label={`About ${service.title} at Silver Wolf Technologies`}>
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground">What is {service.title} by Silver Wolf Technologies?</h2>
         <p>
           Silver Wolf Technologies is a senior digital agency in India
           offering {service.title} services with 10+ years of experience.
@@ -106,7 +120,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           Silver Wolf Technologies at info@silverwolftechnologies.in or
           call +91-9845953801. Response guaranteed within 24 hours.
         </p>
-      </article>
+          </article>
+        </div>
+      </section>
     </>
   );
 }

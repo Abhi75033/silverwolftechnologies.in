@@ -10,6 +10,7 @@ export default function SchemaMarkup({ type, data }: SchemaProps) {
     organization: {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": "https://www.silverwolftechnologies.in/#organization",
       "name": "Silver Wolf Technologies",
       "url": "https://www.silverwolftechnologies.in",
       "logo": "https://www.silverwolftechnologies.in/favicon.png",
@@ -36,7 +37,9 @@ export default function SchemaMarkup({ type, data }: SchemaProps) {
     localBusiness: {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
+      "@id": "https://www.silverwolftechnologies.in/#localbusiness",
       "name": "Silver Wolf Technologies",
+      "parentOrganization": { "@id": "https://www.silverwolftechnologies.in/#organization" },
       "image": "https://www.silverwolftechnologies.in/og-image.jpg",
       "url": "https://www.silverwolftechnologies.in",
       "telephone": "+919845953801",
@@ -68,6 +71,7 @@ export default function SchemaMarkup({ type, data }: SchemaProps) {
     website: {
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": "https://www.silverwolftechnologies.in/#website",
       "name": "Silver Wolf Technologies",
       "url": "https://www.silverwolftechnologies.in"
     },

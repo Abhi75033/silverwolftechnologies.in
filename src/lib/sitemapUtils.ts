@@ -74,6 +74,8 @@ export function getCorePageUrls(): SitemapUrl[] {
     { loc: `${BASE_URL}/locations`, lastmod: now, changefreq: 'monthly', priority: '0.8' },
     { loc: `${BASE_URL}/contact`,   lastmod: now, changefreq: 'monthly', priority: '0.6' },
     { loc: `${BASE_URL}/careers`,   lastmod: now, changefreq: 'monthly', priority: '0.8' },
+    { loc: `${BASE_URL}/privacy-policy`, lastmod: now, changefreq: 'yearly', priority: '0.3' },
+    { loc: `${BASE_URL}/terms`,     lastmod: now, changefreq: 'yearly', priority: '0.3' },
   ];
 }
 

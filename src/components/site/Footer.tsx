@@ -274,7 +274,13 @@ export const Footer = () => {
 
         {/* ===== BOTTOM COPYRIGHT STRIP ===== */}
         <div className="border-t border-slate-200/80 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 font-medium">
-          <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} {SITE.name}. All rights reserved.
+            <span className="mx-2">·</span>
+            <Link href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <span className="mx-2">·</span>
+            <Link href="/terms" className="hover:text-primary transition-colors">Terms of Use</Link>
+          </p>
           <div className="flex flex-wrap justify-center gap-3 text-slate-600">
             <span>🇮🇳 India</span>
             <span>·</span>

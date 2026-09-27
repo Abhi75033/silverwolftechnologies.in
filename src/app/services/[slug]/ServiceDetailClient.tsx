@@ -305,6 +305,31 @@ export default function ServiceDetailClient({
   const areaData = citySlugParam && subCitySlugParam ? getAreaData(citySlugParam, subCitySlugParam, service.title) : undefined;
   const cityData = citySlugParam ? getCityData(citySlugParam) : undefined;
 
+  /**
+   * "Serving businesses across …" line. Generated localities carry an empty
+   * nearbyAreas array, and `[]` is truthy, so 5,236 pages rendered
+   * "(including )". Use the hand-written list when there is one; otherwise
+   * name up to three neighbouring localities from the same city list.
+   */
+  const servingSuffix = (() => {
+    if (areaData?.nearbyAreas?.length) {
+      return `(including ${areaData.nearbyAreas.join(", ")})`;
+    }
+    if (subCity && city) {
+      const i = subCities.indexOf(subCity);
+      const picks = [subCities[i - 1], subCities[i + 1], subCities[i + 2], subCities[i - 2]]
+        .filter((x): x is string => Boolean(x) && x !== subCity)
+        .slice(0, 3);
+      if (picks.length) {
+        const list = picks.length > 1
+          ? `${picks.slice(0, -1).join(", ")} and ${picks[picks.length - 1]}`
+          : picks[0];
+        return `& other parts of ${city} like ${list}`;
+      }
+    }
+    return "& nearby regions";
+  })();
+
   const breadcrumbs = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
@@ -391,7 +416,7 @@ export default function ServiceDetailClient({
               {(city || subCity) && (
                 <p className="text-sm text-muted-foreground mb-8 inline-flex items-center gap-2 glass rounded-full px-4 py-2">
                   <MapPin className="h-3.5 w-3.5 text-primary" />
-                  Serving businesses across {locationLabel} {areaData && areaData.nearbyAreas ? `(including ${areaData.nearbyAreas.join(', ')})` : '& nearby regions'}
+                  Serving businesses across {locationLabel} {servingSuffix}
                 </p>
               )}
 

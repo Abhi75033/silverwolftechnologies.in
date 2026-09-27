@@ -61,7 +61,7 @@ export const defaultSEO: Metadata = {
     description: "Senior digital agency — websites, apps, CRMs, SEO & marketing for ambitious brands worldwide.",
     url: "https://www.silverwolftechnologies.in",
     images: [{
-      url: "https://www.silverwolftechnologies.in/_next/static/media/hero-bg.3c461c14.jpg",
+      url: "https://www.silverwolftechnologies.in/og-image.jpg",
       width: 1200,
       height: 630,
       alt: "Silver Wolf Technologies — Digital Agency India"
@@ -71,7 +71,7 @@ export const defaultSEO: Metadata = {
     card: "summary_large_image",
     title: "Web Development & SEO Company in India | Silver Wolf Technologies",
     description: "Senior digital agency with 10+ years — websites, apps, CRMs, SEO & marketing for global brands.",
-    images: ["https://www.silverwolftechnologies.in/_next/static/media/hero-bg.3c461c14.jpg"]
+    images: ["https://www.silverwolftechnologies.in/og-image.jpg"]
   },
   robots: {
     index: true,

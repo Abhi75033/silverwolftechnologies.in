@@ -35,33 +35,37 @@ export default function ServiceCityPage({ params }: { params: { slug: string; ci
   }
 
   const pageUrl = `https://www.silverwolftechnologies.in/services/${service.slug}/${citySlug(city)}`;
-  const localBusinessSchema = {
+  /**
+   * Service schema (was LocalBusiness). The old block claimed a business
+   * address in every city — e.g. "Mayfair, IN" — alongside the real
+   * Murbad HQ in the site-wide schema, with conflicting opening hours.
+   * Google treats invented locations as misleading structured data. A Service
+   * with `areaServed` says what is actually true: this service is offered to
+   * clients in this area by the one real organisation.
+   */
+  const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "ProfessionalService"],
-    "name": "Silver Wolf Technologies — " + service.title + " in " + city,
+    "@type": "Service",
+    "@id": pageUrl + "#service",
+    "name": service.title + " in " + city,
+    "serviceType": service.title,
     "url": pageUrl,
     "description": "Silver Wolf Technologies provides " + service.title +
-      " in " + city + ". Senior team with 10+ years experience, " +
-      "transparent pricing, and 24-hour response guarantee.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": city,
-      "addressCountry": "IN"
-    },
-    "telephone": "+91-9845953801",
-    "email": "info@silverwolftechnologies.in",
-    "areaServed": city,
-    "parentOrganization": {
+      " for businesses in " + city + ". Senior team with 10+ years " +
+      "experience, transparent pricing, and a reply within 24 hours.",
+    "provider": {
       "@type": "Organization",
+      "@id": "https://www.silverwolftechnologies.in/#organization",
       "name": "Silver Wolf Technologies",
-      "url": "https://www.silverwolftechnologies.in"
+      "url": "https://www.silverwolftechnologies.in",
+      "telephone": "+91-9845953801",
+      "email": "info@silverwolftechnologies.in"
     },
-    "priceRange": "₹₹",
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-      "opens": "09:00",
-      "closes": "19:00"
+    "areaServed": { "@type": "City", "name": city },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "INR",
+      "url": "https://www.silverwolftechnologies.in/contact"
     }
   };
 
@@ -69,7 +73,7 @@ export default function ServiceCityPage({ params }: { params: { slug: string; ci
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <ServiceDetailClient slug={params.slug} citySlugParam={params.city} />
       <LocationSeoBlock

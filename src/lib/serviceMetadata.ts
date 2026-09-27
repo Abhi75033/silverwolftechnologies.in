@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { notFound, permanentRedirect } from "next/navigation";
 import { SERVICES, cityFromSlug, subCityFromSlug, SITE, citySlug } from "@/data/site";
 import { getAreaData } from "@/lib/locationData";
 import { isLocalityIndexable } from "@/lib/curatedCities";
@@ -27,10 +28,32 @@ function simpleHash(a: string, b: string): number {
 
 export function generateServiceMetadata(slug: string, citySlugParam?: string, subCitySlugParam?: string): Metadata {
   const service = SERVICES.find((s) => s.slug === slug);
-  if (!service) return {};
+
+  /**
+   * Validate the URL here, in generateMetadata, rather than only in the page.
+   * The root app/loading.tsx makes every route stream: by the time the page
+   * component runs, a 200 status has already been sent, so a notFound() or
+   * permanentRedirect() there produced a "soft 404" (HTTP 200 + noindex) or a
+   * meta-refresh instead of a real 404 / 308. Metadata is resolved before the
+   * response starts, so throwing here returns the correct status code.
+   */
+  if (!service) notFound();
 
   const city = citySlugParam ? cityFromSlug(citySlugParam) : undefined;
+  if (citySlugParam && !city) notFound();
+
   const subCity = city && subCitySlugParam ? subCityFromSlug(city, subCitySlugParam) : undefined;
+  if (subCitySlugParam && !subCity) notFound();
+
+  // Canonical-form guard: /…/Pune → /…/pune with a real 308.
+  if (
+    (city && citySlugParam !== citySlug(city)) ||
+    (subCity && subCitySlugParam !== citySlug(subCity))
+  ) {
+    permanentRedirect(
+      `/services/${service.slug}${city ? `/${citySlug(city)}` : ""}${subCity ? `/${citySlug(subCity)}` : ""}`
+    );
+  }
 
   const areaData = citySlugParam && subCitySlugParam ? getAreaData(citySlugParam, subCitySlugParam, service.title) : undefined;
 
@@ -54,7 +77,7 @@ export function generateServiceMetadata(slug: string, citySlugParam?: string, su
    * if even the short form does not fit, drop the brand and keep the keywords,
    * which are what actually earn the click.
    */
-  const TITLE_LIMIT = 70;
+  const TITLE_LIMIT = 60;
   const BRAND_FULL = " | Silver Wolf Technologies";
   const BRAND_SHORT = " | Silver Wolf Tech";
   const brand =

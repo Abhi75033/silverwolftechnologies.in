@@ -24,20 +24,13 @@ export const metadata: Metadata = {
     canonical: `${SITE.domain}/about`,
   },
   openGraph: {
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Silver Wolf Technologies" }],
     title: `About Us — 10+ Years of Digital Excellence`,
     description: `Meet ${SITE.name} — senior engineers, marketers and designers with ${SITE.yearsExperience}+ years of combined experience serving brands worldwide.`,
     url: `${SITE.domain}/about`,
   },
 };
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.domain}/` },
-    { "@type": "ListItem", position: 2, name: "About", item: `${SITE.domain}/about` },
-  ],
-};
 
 const breadcrumbs = [
   { name: "Home", href: "/" },
@@ -47,10 +40,7 @@ const breadcrumbs = [
 export default function AboutPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      {/* BreadcrumbList JSON-LD comes from the visible <Breadcrumb> component — one copy per page. */}
       <section className="pt-36 pb-8 text-center">
         <div className="container max-w-3xl animate-fade-up">
           <Breadcrumb items={breadcrumbs} />

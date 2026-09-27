@@ -58,12 +58,14 @@ const homepageFaqs = [
 const schema1 = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+  "@id": "https://www.silverwolftechnologies.in/#organization",
   "name": "Silver Wolf Technologies",
   "url": "https://www.silverwolftechnologies.in",
-  "logo": "https://www.silverwolftechnologies.in/_next/static/media/logo.d7fb2ec1.png",
-  "image": "https://www.silverwolftechnologies.in/_next/static/media/hero-bg.3c461c14.jpg",
+  // Stable public URLs — hashed /_next/static paths change on every image edit.
+  "logo": "https://www.silverwolftechnologies.in/favicon.png",
+  "image": "https://www.silverwolftechnologies.in/og-image.jpg",
   "description": "Silver Wolf Technologies is a senior digital agency with 10+ years building high-performance websites, mobile apps, CRMs, SaaS platforms, and executing SEO and digital marketing campaigns for startups, SMBs and global enterprises across India and worldwide.",
-  "foundingDate": "2014",
+  "foundingDate": "2015", // matches SITE.founded and the site-wide Organization schema
   "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 10, "maxValue": 50 },
   "address": {
     "@type": "PostalAddress",
@@ -88,7 +90,8 @@ const schema1 = {
   ],
   "email": "info@silverwolftechnologies.in",
   "sameAs": [
-    "https://wa.me/919845953801"
+    "https://www.linkedin.com/company/silver-wolf-technologies",
+    "https://www.instagram.com/silverwolftechnologies"
   ],
   "areaServed": ["India", "United Kingdom", "United Arab Emirates",
     "United States", "Canada", "Australia", "Singapore"],
@@ -108,84 +111,33 @@ const schema1 = {
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UI/UX Design" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Graphic Design" } }
     ]
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "50",
-    "bestRating": "5",
-    "worstRating": "1"
   }
+  // aggregateRating removed — a fixed rating with no real reviews behind it
+  // is misleading structured data. Add it back only from genuine reviews.
 };
 
 const schema2 = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": "https://www.silverwolftechnologies.in/#website",
   "name": "Silver Wolf Technologies",
-  "url": "https://www.silverwolftechnologies.in",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://www.silverwolftechnologies.in/services/?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
+  "url": "https://www.silverwolftechnologies.in"
+  // SearchAction removed: the site has no search results page for it to
+  // point at, and Google retired the sitelinks search box in 2024.
 };
 
+// Built from homepageFaqs, which mirrors the visible FAQ section. FAQ schema
+// must match what visitors can read on the page — the previous hand-written
+// answers had different numbers (e.g. app timelines) and claims not shown on
+// the page, which Google treats as a structured-data mismatch.
 const schema3 = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much does a website cost in India?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Website development cost in India varies by complexity. Silver Wolf Technologies builds business websites starting from affordable packages, with e-commerce and enterprise platforms priced based on scope. Contact us for a free transparent quote within 24 hours."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does Silver Wolf Technologies work with international clients?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Silver Wolf Technologies works with clients across India, UK, UAE, USA, Canada, Australia, and Singapore. The team collaborates seamlessly across IST, EST, GMT and AEST timezones with senior strategists in every meeting."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long does a website or app project take?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most business websites ship in 2–4 weeks. Mobile apps typically take 8–12 weeks. CRM and SaaS platforms are scoped per project. Silver Wolf uses sprint-based execution with weekly demos and transparent timelines."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does Silver Wolf Technologies offer SEO and marketing as a retainer?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Silver Wolf Technologies offers monthly SEO and digital marketing retainers. They currently manage 50+ active retainers across SaaS, e-commerce, D2C and service businesses, delivering an average 3.4x ROI within 90 days."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Will I own the code and assets after the project?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Silver Wolf Technologies delivers full code ownership and all creative assets to clients upon project completion. You get clean, well-documented codebases that any team can maintain."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which cities in India does Silver Wolf Technologies serve?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Silver Wolf Technologies serves 22+ cities and 434+ localities across India including Mumbai, Delhi, Bangalore, Hyderabad, Pune, Chennai, Kolkata, Ahmedabad, Jaipur, Lucknow, Chandigarh, Noida, Gurgaon, Indore, Surat, and Kochi, along with international locations."
-      }
-    }
-  ]
+  "mainEntity": homepageFaqs.map((f) => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": f.answer },
+  })),
 };
 
 

@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     canonical: `${SITE.domain}/careers`,
   },
   openGraph: {
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Silver Wolf Technologies" }],
     title: "Careers — Join Silver Wolf Technologies",
     description: "Explore open roles at Silver Wolf Technologies. We're hiring full-stack developers, SEO specialists, designers and marketers. Remote-first team.",
     url: `${SITE.domain}/careers`,

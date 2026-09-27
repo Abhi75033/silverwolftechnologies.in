@@ -43,33 +43,41 @@ export default function ServiceSubCityPage({ params }: { params: { slug: string;
   const areaData = getAreaData(params.city, params.subcity, service.title);
 
   const pageUrl = `https://www.silverwolftechnologies.in/services/${service.slug}/${citySlug(city)}/${citySlug(subCity)}`;
-  const localBusinessSchema = {
+  /**
+   * Service schema (was LocalBusiness). The old block claimed a business
+   * address in every locality — e.g. "Mayfair, IN" — alongside the real
+   * Murbad HQ in the site-wide schema, with conflicting opening hours.
+   * Google treats invented locations as misleading structured data. A Service
+   * with `areaServed` says what is actually true: this service is offered to
+   * clients in this area by the one real organisation.
+   */
+  const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "ProfessionalService"],
-    "name": "Silver Wolf Technologies — " + service.title + " in " + subCity,
+    "@type": "Service",
+    "@id": pageUrl + "#service",
+    "name": service.title + " in " + subCity + ", " + city,
+    "serviceType": service.title,
     "url": pageUrl,
     "description": "Silver Wolf Technologies provides " + service.title +
-      " in " + subCity + ". Senior team with 10+ years experience, " +
-      "transparent pricing, and 24-hour response guarantee.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": subCity,
-      "addressCountry": "IN"
-    },
-    "telephone": "+91-9845953801",
-    "email": "info@silverwolftechnologies.in",
-    "areaServed": subCity,
-    "parentOrganization": {
+      " for businesses in " + subCity + ", " + city + ". Senior team with 10+ years " +
+      "experience, transparent pricing, and a reply within 24 hours.",
+    "provider": {
       "@type": "Organization",
+      "@id": "https://www.silverwolftechnologies.in/#organization",
       "name": "Silver Wolf Technologies",
-      "url": "https://www.silverwolftechnologies.in"
+      "url": "https://www.silverwolftechnologies.in",
+      "telephone": "+91-9845953801",
+      "email": "info@silverwolftechnologies.in"
     },
-    "priceRange": "₹₹",
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-      "opens": "09:00",
-      "closes": "19:00"
+    "areaServed": {
+      "@type": "Place",
+      "name": subCity + ", " + city,
+      "containedInPlace": { "@type": "City", "name": city }
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "INR",
+      "url": "https://www.silverwolftechnologies.in/contact"
     }
   };
 
@@ -77,7 +85,7 @@ export default function ServiceSubCityPage({ params }: { params: { slug: string;
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <ServiceDetailClient slug={params.slug} citySlugParam={params.city} subCitySlugParam={params.subcity} />
       {/*
@@ -99,6 +107,7 @@ export default function ServiceSubCityPage({ params }: { params: { slug: string;
             ? areaData.faqs
             : generateLocationFaqs(service.title, city, subCity)
         }
+        faqsShownElsewhere={Boolean(areaData?.faqs?.length)}
       />
     </>
   );
