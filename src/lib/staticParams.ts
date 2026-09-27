@@ -43,9 +43,8 @@ export function serviceCityParams(): { slug: string; city: string }[] {
  *
  * Pre-renders localities for curated cities only — those are the pages we are
  * asking Google to index, so those are the ones that must be fast on first
- * crawl. Uncurated localities are `noindex` and absent from the sitemap; they
- * still resolve for any visitor who lands on one, generated on first request
- * and cached by ISR (dynamicParams stays true on the route).
+ * crawl. Other localities are indexable and in the sitemap too; they are
+ * generated on first request and cached by ISR (dynamicParams stays true).
  *
  * This also keeps build times sane: pre-rendering all 6,076 was the risk,
  * pre-rendering the curated subset is not.

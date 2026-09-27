@@ -18,7 +18,7 @@
  */
 
 import { SERVICES, CITIES, SUB_CITIES, SITE, citySlug } from '@/data/site';
-import { isCuratedCity } from '@/lib/curatedCities';
+import { isLocalityIndexable } from '@/lib/curatedCities';
 
 // ─── Configuration ───────────────────────────────────────────────────────────
 /** Max URLs per sitemap file. Google allows 50,000 but 1,500 is optimal for
@@ -108,13 +108,11 @@ export function getCityPageUrls(): SitemapUrl[] {
 }
 
 /**
- * Service × City × SubCity URLs for curated cities only (unsliced).
+ * Service × City × SubCity URLs (unsliced).
  *
- * Only cities with real hand-written locality content are listed. Uncurated
- * localities are marked `noindex` in their metadata, and listing a noindexed
- * URL in a sitemap is a self-contradicting signal that Search Console reports
- * as an error. As each city is promoted in lib/curatedCities.ts its localities
- * appear here automatically.
+ * Lists every locality whose page is indexable — see isLocalityIndexable()
+ * and INDEX_ALL_LOCALITIES in lib/curatedCities.ts. Using the same function
+ * as the robots meta tag guarantees the sitemap never lists a noindexed URL.
  */
 export function getAllSubCityUrls(): SitemapUrl[] {
   const now = currentDate();
@@ -122,7 +120,7 @@ export function getAllSubCityUrls(): SitemapUrl[] {
 
   for (const service of SERVICES) {
     for (const city of CITIES) {
-      if (!isCuratedCity(city)) continue;
+      if (!isLocalityIndexable(citySlug(city))) continue;
       const subs = SUB_CITIES[city] || [];
       for (const sub of subs) {
         urls.push({
@@ -155,14 +153,14 @@ export function getSubCityChunk(chunkNumber: number): SitemapUrl[] | null {
 /**
  * Calculate how many subcity chunks are needed.
  *
- * Must count curated cities only, matching getAllSubCityUrls — otherwise the
+ * Must use the same filter as getAllSubCityUrls — otherwise the
  * sitemap index advertises chunk files that resolve to empty urlsets, which
  * Search Console reports as sitemap errors.
  */
 export function getSubCityChunkCount(): number {
   let totalSubCityUrls = 0;
   for (const city of CITIES) {
-    if (!isCuratedCity(city)) continue;
+    if (!isLocalityIndexable(citySlug(city))) continue;
     totalSubCityUrls += (SUB_CITIES[city] || []).length;
   }
   totalSubCityUrls *= SERVICES.length;

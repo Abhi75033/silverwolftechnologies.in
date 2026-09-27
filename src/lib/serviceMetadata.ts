@@ -104,12 +104,9 @@ export function generateServiceMetadata(slug: string, citySlugParam?: string, su
   const canonicalUrl = `${SITE.domain}${canonicalPath}`;
 
   /**
-   * Locality pages are only indexable where the city has real hand-written
-   * content (see lib/curatedCities.ts). Uncurated localities are served
-   * normally to visitors but marked `noindex, follow`: Google is not asked to
-   * index near-duplicate template output, while link equity still flows
-   * through to the city and service pages. City-level and service-level pages
-   * are always indexable.
+   * All service, city and locality pages are indexable. isLocalityIndexable()
+   * returns true for every city while INDEX_ALL_LOCALITIES is on
+   * (lib/curatedCities.ts).
    */
   const indexable =
     !subCity || (citySlugParam ? isLocalityIndexable(citySlugParam) : false);

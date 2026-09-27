@@ -40,6 +40,18 @@ export const CURATED_CITIES: ReadonlySet<string> = new Set([
   "mumbai",  // src/data/locations/mumbai.ts  — 36 areas
 ]);
 
+/**
+ * Master switch: index EVERY locality page (all 22 cities, ~6,076 pages).
+ *
+ *   true  → every locality page is `index, follow` and listed in the sitemap.
+ *   false → only CURATED_CITIES localities are indexable; the rest are
+ *           `noindex, follow` and left out of the sitemap.
+ *
+ * Both the robots meta tag (lib/serviceMetadata.ts) and the sitemap
+ * (lib/sitemapUtils.ts) read isLocalityIndexable(), so they always agree.
+ */
+export const INDEX_ALL_LOCALITIES = true;
+
 /** Does this city's locality pages have real content behind them? */
 export function isCuratedCity(cityOrSlug: string): boolean {
   const slug = cityOrSlug.includes(" ")
@@ -56,6 +68,7 @@ export function isCuratedCity(cityOrSlug: string): boolean {
  * Locality pages are indexable only where the city is curated.
  */
 export function isLocalityIndexable(citySlugParam: string): boolean {
+  if (INDEX_ALL_LOCALITIES) return true;
   return CURATED_CITIES.has(citySlugParam.toLowerCase());
 }
 
